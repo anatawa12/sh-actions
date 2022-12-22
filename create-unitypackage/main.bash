@@ -3,9 +3,11 @@ set -eu
 
 main() {
     # parameter check
-    test -z "${OUTPUT:-}" && die "no OUTPUT"
-    test -z "${ROOT:-}" && die "no ROOT"
-    : "${PREFIX:="$(relativize_path "$ROOT")"}"
+    test -z "${1:-}" && die "no OUTPUT"
+    test -z "${2:-}" && die "no ROOT"
+    OUTPUT="$1"
+    ROOT="$2"
+    PREFIX="${3:-"$(relativize_path "$ROOT")"}"
 
     # prepare other variables
     create_temp_dir create-unitypackage
@@ -69,4 +71,4 @@ read_guid() {
 . "$(dirname $0)/../utils.bash"
 
 # execute
-main
+main "$@"

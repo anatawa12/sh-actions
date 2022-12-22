@@ -18,7 +18,7 @@ runs:
     using: "composite"
     steps:
         - id: main
-          run: bash "$GITHUB_ACTION_PATH/action.yml"
+          run: bash "$GITHUB_ACTION_PATH/main.bash" "$OUTPUT" "$ROOT" "$PREFIX"
           shell: bash
           env:
               OUTPUT: ${{ inputs.output-path }}
