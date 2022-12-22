@@ -20,13 +20,13 @@ printf_prefix() {
     printf "$PREFIX$FMT\n" "$@"
 }
 
-warnf () {
-    printf_prefix "::warning::" "$@" >&2
-}
-
-debugf () {
-    printf_prefix "::debug::" "$@"
-}
+if [ "$GITHUB_ACTIONS" = "true" ]; then
+warnf () { printf_prefix "::warning::" "$@" >&2 ;}
+debugf () { printf_prefix "::debug::" "$@" ;}
+else
+warnf () { printf_prefix "w: " "$@" >&2 ;}
+debugf () { :; }
+fi
 
 #endregion
 
