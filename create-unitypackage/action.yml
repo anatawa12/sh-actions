@@ -1,0 +1,29 @@
+name: 'Create UnityPackage'
+description: 'Create UnityPackage'
+inputs:
+    output-path:
+        description: 'Output unitypackage path'
+        required: true
+    package-path:
+        description: 'Contents root of the UnityPackage'
+        required: true
+    path-prefix:
+        description: 'Prefix of the paths. By default, package-path is used.'
+        required: false
+outputs:
+    greet:
+        description: 'The word we greeted you'
+        value: ${{ steps.greet.outputs.word }}
+runs:
+    using: "composite"
+    steps:
+        - id: main
+          run: bash "$GITHUB_ACTION_PATH/action.yml"
+          shell: bash
+          env:
+              OUTPUT: ${{ inputs.output-path }}
+              ROOT: ${{ inputs.package-path }}
+              PREFIX: ${{ inputs.path-prefix }}
+branding:
+    icon: 'award'
+    color: 'green'
