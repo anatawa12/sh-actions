@@ -3,9 +3,9 @@ name: Test
 on:
   push:
     branches: [master]
-    paths: ['common/**', 'create-unitypackage/**']
+    paths: ['common/**', 'create-unitypackage/**', '.github/workflows/test-create-unitypackage.yml']
   pull_request:
-    paths: ['common/**', 'create-unitypackage/**']
+    paths: ['common/**', 'create-unitypackage/**', '.github/workflows/test-create-unitypackage.yml']
   workflow_dispatch:
 
 jobs:
