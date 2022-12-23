@@ -1,0 +1,44 @@
+name: Test
+
+on:
+  push:
+    branches: [master]
+    paths: ['common/**', 'create-unitypackage/**']
+  pull_request:
+    paths: ['common/**', 'create-unitypackage/**']
+  workflow_dispatch:
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        test: [ 'simple' ]
+        pathPart: [ '', './', 'simple/../', '/' ]
+        prefix: [ '', 'prefix' ]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 1
+    defaults: { run: { shell: bash } }
+    steps:
+      - uses: actions/checkout@v3
+      - id: action
+        uses: ./create-unitypackage
+        with:
+          output-path: test.unitypackage
+          package-path: create-unitypackage/tests/${{ matrix.pathPart }}${{ matrix.test }}/contents
+          path-prefix: ${{ matrix.prefix }}
+      - name: Check
+        run: |
+          tar xzf test.unitypackage -C unitypackage-contents
+          create-unitypackage/tests/${{ matrix.test }}/check.bash
+        env:
+          PREFIX: ${{ matrix.prefix }}
+
+  # Make up matrix statuses into a status for status checks in branch protection rules
+  test-passing:
+    needs: [ test ]
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - run: echo "All tests have passed."
