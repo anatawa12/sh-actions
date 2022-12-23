@@ -44,7 +44,6 @@ main() {
         test -f "$file_path" && cp "$file_path" "$TAR_ROOT/$GUID/asset"
         printf "%s/%s" "$PREFIX" "$file_path" > "$TAR_ROOT/$GUID/pathname"
     done
-  popd > /dev/null
 
     # if exists, add meta file for package root
     if [ -n "$ROOT_META" ]; then
@@ -59,6 +58,8 @@ main() {
             printf "%s" "$PREFIX" > "$TAR_ROOT/$GUID/pathname"
         fi
     fi
+
+  popd > /dev/null
 
     # create unitypackage file with tar
     tar -czf "$OUTPUT" -C "$TAR_ROOT" '.'
