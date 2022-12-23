@@ -18,7 +18,7 @@ runs:
       shell: bash
       env:
         OUTPUT: ${{ inputs.output-path }}
-          ROOT: ${{ inputs.package-path }}
+        ROOT: ${{ inputs.package-path }}
         PREFIX: ${{ inputs.path-prefix }}
 branding:
   icon: 'award'
