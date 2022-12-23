@@ -32,7 +32,7 @@ jobs:
         run: |
           mkdir unitypackage-contents
           tar xzf test.unitypackage -C unitypackage-contents
-          create-unitypackage/tests/${{ matrix.test }}/check.bash
+          bash -eu create-unitypackage/tests/${{ matrix.test }}/check.bash
         env:
           PREFIX: ${{ matrix.prefix }}
 
