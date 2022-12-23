@@ -15,7 +15,7 @@ check_folder_asset() {
 check_root_folder_asset() {
     check_root_asset_meta "$1"
     test ! -e unitypackage-contents/"$1"/asset || die "asset content of root folder asset (guid: $1) exists"
-    check_asset_path "$1"
+    check_root_asset_path "$1"
 }
 
 check_asset_meta() {
