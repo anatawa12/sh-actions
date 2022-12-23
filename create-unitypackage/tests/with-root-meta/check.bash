@@ -4,8 +4,8 @@ set -eu
 
 source ./create-unitypackage/tests/tests.bash
 
-: ${PREFIX:=create-unitypackage/tests/simple/contents}
-CONTENTS="create-unitypackage/tests/simple/contents"
+: ${PREFIX:=create-unitypackage/tests/with-root-meta/contents}
+CONTENTS="create-unitypackage/tests/with-root-meta/contents"
 
 check_file_asset   "2323c8d8e5fb402b9fdbc30bb0235b4c" "test.cs"
 check_folder_asset "395c349e3ab442ffb639bbe5be174bb4" "folder"
