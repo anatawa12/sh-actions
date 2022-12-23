@@ -45,8 +45,8 @@ relativize_path() {
             # path/something////../path
             # -> path/////../path
             for prev in `seq $(($index - 1)) 0`; do
-                if [ -n "${COMPONENTS[prev]}" ]; then
-                    COMPONENTS[prev]=''
+                if [ -n "${COMPONENTS[$prev]}" ]; then
+                    COMPONENTS[$prev]=''
                     break
                 fi
             done
