@@ -49,10 +49,10 @@ main() {
     # if exists, add meta file for package root
     if [ -n "$ROOT_META" ]; then
         debugf "%s for root folder found\n" "$ROOT_META"
-        GUID="$(read_guid "$meta_path")"
+        GUID="$(read_guid "$ROOT_META")"
 
         if [ -z "$GUID" ]; then
-            warnf "GUID for %s not found!" "$meta_path"
+            warnf "GUID for %s not found!" "$ROOT_META"
         else
             mkdir "$TAR_ROOT/$GUID"
             cp "$ROOT_META" "$TAR_ROOT/$GUID/asset.meta"
