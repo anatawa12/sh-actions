@@ -41,10 +41,10 @@ relativize_path() {
     for index in "${!COMPONENTS[@]}" ; do
         if [ "${COMPONENTS[index]}" = '.' ]; then
             COMPONENTS[index]=''
-        elif [ "${COMPONENTS[index]}" = '..' -a "$index" -ne 0 ]; then
+        elif [ "${COMPONENTS[index]}" = '..' ]; then
             # path/something////../path
             # -> path/////../path
-            for prev in `seq $(($index - 1)) 0`; do
+            for prev in `seq 0 $(($index - 1)) | tac`; do
                 if [ -n "${COMPONENTS[$prev]}" ]; then
                     COMPONENTS[$prev]=''
                     break
