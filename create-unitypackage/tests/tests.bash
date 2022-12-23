@@ -19,23 +19,27 @@ check_root_folder_asset() {
 }
 
 check_asset_meta() {
-    cmp -s unitypackage-contents/"$1"/asset.meta "$CONTENTS/$2.meta" || die "asset content of $2 (guid: $1) differ"
+    die_if_differ unitypackage-contents/"$1"/asset.meta "$CONTENTS/$2.meta" "asset content of $2 (guid: $1) differ"
 }
 
 check_asset_content() {
-    cmp -s unitypackage-contents/"$1"/asset "$CONTENTS/$2" || die "asset content of $2 (guid: $1) differ"
+    die_if_differ unitypackage-contents/"$1"/asset "$CONTENTS/$2" "asset content of $2 (guid: $1) differ"
 }
 
 check_asset_path() {
     printf '%s/%s' "$PREFIX" "$2" > pathbuf
-    cmp -s unitypackage-contents/"$1"/pathname pathbuf || die "pathname of $2 (guid: $1) differ"
+    die_if_differ unitypackage-contents/"$1"/pathname pathbuf "pathname of $2 (guid: $1) differ"
 }
 
 check_root_asset_meta() {
-    cmp -s unitypackage-contents/"$1"/asset.meta "$CONTENTS.meta" || die "asset content of root asset (guid: $1) differ"
+    die_if_differ unitypackage-contents/"$1"/asset.meta "$CONTENTS.meta" "asset content of root asset (guid: $1) differ"
 }
 
 check_root_asset_path() {
     printf '%s' "$PREFIX" > pathbuf
-    cmp -s unitypackage-contents/"$1"/pathname pathbuf || die "pathname of $2 (guid: $1) differ"
+    die_if_differ unitypackage-contents/"$1"/pathname pathbuf "pathname of $2 (guid: $1) differ"
+}
+
+die_if_differ() {
+    diff "$1" "$2" >&2 || ( shift; shift; die "$@" )
 }
