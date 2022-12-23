@@ -37,7 +37,7 @@ check_root_asset_meta() {
 
 check_root_asset_path() {
     printf '%s' "$PREFIX" > pathbuf
-    die_if_differ unitypackage-contents/"$1"/pathname pathbuf "pathname of $2 (guid: $1) differ"
+    die_if_differ unitypackage-contents/"$1"/pathname pathbuf "pathname of root asset (guid: $1) differ"
 }
 
 die_if_differ() {
