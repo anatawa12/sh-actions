@@ -10,10 +10,6 @@ inputs:
   path-prefix:
     description: 'Prefix of the paths. By default, package-path is used.'
     required: false
-outputs:
-  greet:
-      description: 'The word we greeted you'
-    value: ${{ steps.greet.outputs.word }}
 runs:
   using: "composite"
   steps:
