@@ -68,7 +68,7 @@ read_guid() {
     grep '^guid: ' "$1" | head -1 | sed 's#^guid: *##'
 }
 
-. "$(dirname $0)/../utils.bash"
+. "$(dirname $0)/../common/utils.bash"
 
 # execute
 main "$@"
