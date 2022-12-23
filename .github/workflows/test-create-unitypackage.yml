@@ -30,6 +30,7 @@ jobs:
           path-prefix: ${{ matrix.prefix }}
       - name: Check
         run: |
+          mkdir unitypackage-contents
           tar xzf test.unitypackage -C unitypackage-contents
           create-unitypackage/tests/${{ matrix.test }}/check.bash
         env:
