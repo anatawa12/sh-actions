@@ -20,11 +20,9 @@ jobs:
     defaults: { run: { shell: bash } }
     steps:
       - uses: actions/checkout@v3
-      - name: "Read file contents"
-        id: read_repos
-        uses: andstor/file-reader-action@v1
-        with:
-          path: "resolve-vpm-packages/tests/${{ matrix.test }}/repos"
+      - uses: anatawa12/something-releaser@v2
+      - id: read_repos
+        run: gh-set-output contents "$(cat "resolve-vpm-packages/tests/${{ matrix.test }}/repos")"
       - id: action
         uses: ./resolve-vpm-packages
         with:
