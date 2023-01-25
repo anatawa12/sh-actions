@@ -5,8 +5,8 @@ infer_current_target() {
     local arch suffix
 
     case "$(uname -m)" in
-        arm64* | aarch64* | armv8? ) arch="aarch64" ;;
-        i?86* )                      arch="aarch64" ;;
+        arm64 | aarch64 | armv8? ) arch="aarch64" ;;
+        i?86 | x86_64 )            arch="x86_64" ;;
         * ) echo "Error: unknown arch: $(uname -m)" >&2; exit 1;
     esac
 
