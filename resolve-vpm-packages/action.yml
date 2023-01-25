@@ -1,0 +1,31 @@
+name: 'Resolve vpm packages'
+description: 'Resolves (installs) defined vpm packages of your unity project'
+inputs:
+  project-path:
+    description: 'Path to your project.'
+    default: .
+    required: true
+  repos:
+    description: 'URL of repositoeies. one url per one line'
+    required: false
+runs:
+  using: "composite"
+  steps:
+    - id: install
+      uses: ../setup-vrc-get
+    - id: add-repos
+      run: |
+        printf '%s\n' "$REPOS" | while IFS= read -r url; do
+          test -n "${url:-}" && vrc-get repo add -- "$url"
+        done
+      shell: bash
+      env:
+        REPOS: ${{ inputs.repos }}
+    - id: main
+      run: vrc-get install --project $PROJECT_PATH
+      shell: bash
+      env:
+        PROJECT_PATH: ${{ inputs.project-path }}
+branding:
+  icon: 'award'
+  color: 'green'

@@ -1,0 +1,44 @@
+name: Test resolve-vpm-packages
+
+on:
+  push:
+    branches: [master]
+    paths: ['common/**', 'resolve-vpm-packages/**', '.github/workflows/test-resolve-vpm-packages.yml']
+  pull_request:
+    paths: ['common/**', 'resolve-vpm-packages/**', '.github/workflows/test-resolve-vpm-packages.yml']
+  workflow_dispatch:
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        test: [ only-predefined, with-user-repo ]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 1
+    defaults: { run: { shell: bash } }
+    steps:
+      - uses: actions/checkout@v3
+      - name: "Read file contents"
+        id: read_repos
+        uses: andstor/file-reader-action@v1
+        with:
+          path: "resolve-vpm-packages/tests/${{ matrix.test }}/repos"
+      - id: action
+        uses: ./resolve-vpm-packages
+        with:
+          repos: ${ steps.read_repos.outputs.contents }
+          project-path: "resolve-vpm-packages/tests/${{ matrix.test }}/project"
+      - name: Check
+        run: bash -eu resolve-vpm-packages/tests/${{ matrix.test }}/check.bash
+        env:
+          TEST_NAME: ${{ matrix.test }}
+
+  # Make up matrix statuses into a status for status checks in branch protection rules
+  test-passing:
+    needs: [ test ]
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - run: echo "All tests have passed."
