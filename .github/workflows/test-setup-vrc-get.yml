@@ -1,0 +1,35 @@
+name: Test setup-vrc-get
+
+on:
+  push:
+    branches: [master]
+    paths: ['common/**', 'setup-vrc-get/**', '.github/workflows/test-setup-vrc-get.yml']
+  pull_request:
+    paths: ['common/**', 'setup-vrc-get/**', '.github/workflows/test-setup-vrc-get.yml']
+  workflow_dispatch:
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 1
+    defaults: { run: { shell: bash } }
+    steps:
+      - uses: actions/checkout@v3
+      - id: action
+        uses: ./setup-vrc-get
+      - name: Check
+        run: |
+          vrc-get --help
+          vrc-get --version
+
+  # Make up matrix statuses into a status for status checks in branch protection rules
+  test-passing:
+    needs: [ test ]
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - run: echo "All tests have passed."

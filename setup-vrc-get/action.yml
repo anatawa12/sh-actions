@@ -1,0 +1,22 @@
+name: 'Setup vrc-get'
+description: 'Setup vrc-get (https://github.com/anatawa12/vrc-get)'
+inputs:
+  version:
+    description: 'version of vrc-get. by default, latest version will be used'
+    default: latest
+    required: false
+  target:
+    description: 'target triple to be downloaded for. By default, current platform will be used'
+    required: false
+runs:
+  using: "composite"
+  steps:
+    - id: main
+      run: bash "$GITHUB_ACTION_PATH/main.bash" "$VERSION" "$TARGET"
+      shell: bash
+      env:
+        VERSION: ${{ inputs.version }}
+        TARGET: ${{ inputs.target }}
+branding:
+  icon: 'award'
+  color: 'green'
