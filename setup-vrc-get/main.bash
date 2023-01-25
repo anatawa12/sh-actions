@@ -48,6 +48,7 @@ main() {
     # do download
     mkdir "$OUTPUT_PATH"
     curl -sL "$URL" > "$OUTPUT_FILE"
+    chmod +x "$OUTPUT_FILE"
 
     # add to path
     echo "$OUTPUT_PATH" >> $GITHUB_PATH
