@@ -6,15 +6,17 @@ Github Action to resolve all VPM Packages in your unity project.
 
 ```yaml
 name: ci
-  on:
-  　push:
+
+on:
+  push:
+
 jobs:
   test:
-　  runs-on: ubuntu-latest
-　　  steps:
-       - uses: actions/checkout@v3
-       - uses: anatawa12/sh-actions/reesolve-vpm-packages@master
-       # You can test using game-ci/unity-test-runner@v2
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: anatawa12/sh-actions/reesolve-vpm-packages@master
+      # You can test using game-ci/unity-test-runner@v2
 ```
 
 ## Customizing

@@ -8,13 +8,15 @@ This action will download latest or specified version of vrc-get command.
 
 ```yaml
 name: ci
+
 on:
-　push:
+  push:
+
 jobs:
   test:
-　  runs-on: ubuntu-latest
-　　  steps:
-       - uses: anatawa12/sh-actions/setup-vrc-get@master
+    runs-on: ubuntu-latest
+    steps:
+      - uses: anatawa12/sh-actions/setup-vrc-get@master
 ```
 
 ## Customizing
