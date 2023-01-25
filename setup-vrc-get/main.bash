@@ -21,7 +21,7 @@ infer_current_target() {
 }
 
 executable_suffix() {
-    case "$0" in
+    case "$1" in
         *-windows-* ) echo '.exe' ;;
         * ) ;;
     esac
