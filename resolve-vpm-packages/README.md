@@ -1,8 +1,6 @@
-# Setup [`vrc-get`][vrc-get]
+# Resolve VPM Packages
 
-Github Action to install [`vrc-get`][vrc-get] command
-
-This action will download latest or specified version of vrc-get command.
+Github Action to resolve all VPM Packages in your unity project.
 
 ## Usage
 
@@ -16,7 +14,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: anatawa12/sh-actions/setup-vrc-get@master
+      - uses: actions/checkout@v3
+      - uses: anatawa12/sh-actions/reesolve-vpm-packages@master
+      # You can test using game-ci/unity-test-runner@v2
 ```
 
 ## Customizing
@@ -28,13 +28,12 @@ Following inputs can be used as `step.with` keys:
 > `List` type is a newline-delimited string
 > ```yaml
 > driver-opts: |
->   image=moby/buildkit:master
->   network=host
+>   https://vpm.anatawa12.com/vpm.json
+>   https://vpm.nadena.dev/vpm.json
+>   https://vpm.nadena.dev/vpm-prerelease.json
 > ```
 
-| Name      | Type   | Description                                                                |
-|-----------|--------|----------------------------------------------------------------------------|
-| `version` | String | [vrc-get] version. (eg. `v0.3.0`, `latest`)                                |
-| `target`  | String | Target triple to be downloaded. By default, current platform will be used. |
-
-[vrc-get]: https://github.com/anatawa12/vrc-get
+| Name           | Type   | Description                                                      |
+|----------------|--------|------------------------------------------------------------------|
+| `project-path` | String | Path to your project. By default, GITHUB_WORKSPACE will be used. |
+| `repos`        | List   | List of repository urls.                                         |
