@@ -63,5 +63,5 @@ relativize_path() {
 
 #region polyfills
 # tac is not posix command. use tail -r instead
-which tac || tac() { tail -r "$@"; }
+which tac > /dev/null || tac() { tail -r "$@"; }
 #endregion
