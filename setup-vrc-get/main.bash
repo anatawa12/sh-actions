@@ -50,6 +50,8 @@ main() {
         TARGET="x86_64-pc-windows-msvc"
     fi
 
+    echo "installing vrc-get version $VERSION from $URL" >&2;
+
     # do download
     mkdir "$OUTPUT_PATH"
     curl -sfL "$URL" > "$OUTPUT_FILE"
