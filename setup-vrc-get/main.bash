@@ -45,9 +45,14 @@ main() {
         URL="https://github.com/anatawa12/vrc-get/releases/download/$VERSION/$TARGET-vrc-get$SUFFIX"
     fi
 
+    if [ "$TARGET" = aarch64-pc-windows-msvc ]; then
+        # aarch64-pc-windows-msvc is not supported
+        TARGET="x86_64-pc-windows-msvc"
+    fi
+
     # do download
     mkdir "$OUTPUT_PATH"
-    curl -sL "$URL" > "$OUTPUT_FILE"
+    curl -sfL "$URL" > "$OUTPUT_FILE"
     chmod +x "$OUTPUT_FILE"
 
     # add to path
