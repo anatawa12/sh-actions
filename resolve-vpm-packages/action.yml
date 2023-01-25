@@ -12,7 +12,7 @@ runs:
   using: "composite"
   steps:
     - id: install
-      uses: ./../setup-vrc-get
+      uses: anatawa12/sh-actions/setup-vrc-get@master
     - id: add-repos
       run: |
         printf '%s\n' "$REPOS" | while IFS= read -r url; do
