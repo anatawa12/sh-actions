@@ -16,7 +16,10 @@ runs:
     - id: add-repos
       run: |
         printf '%s\n' "$REPOS" | while IFS= read -r url; do
-          test -n "${url:-}" && vrc-get repo add -- "$url"
+          if [ -n "${url:-}" ]; then
+            echo "adding $url" >&2
+            vrc-get repo add -- "$url"
+          fi
         done
       shell: bash
       env:
