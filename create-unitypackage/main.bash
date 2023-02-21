@@ -23,7 +23,7 @@ main() {
     test ! -f "$ROOT_META" && ROOT_META=""
 
     # find all files in the directory
-    find "." -name "*.meta" | sed 's#^\./##' | while IFS="" read -r meta_path; do
+    find -L "." -name "*.meta" | sed 's#^\./##' | while IFS="" read -r meta_path; do
         file_path="${meta_path%%.meta}"
         GUID="$(read_guid "$meta_path")"
 
