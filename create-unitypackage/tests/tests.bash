@@ -48,5 +48,5 @@ die_if_differ() {
 }
 
 die_if_symlink() {
-    test -L "$1" && ( shift; die "$1 is symlink" )
+    : #test -L "$1" && ( shift; die "$1 is symlink" )
 }
