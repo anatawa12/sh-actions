@@ -19,10 +19,12 @@ check_root_folder_asset() {
 }
 
 check_asset_meta() {
+    die_if_symlink unitypackage-contents/"$1"/asset.meta
     die_if_differ unitypackage-contents/"$1"/asset.meta "$CONTENTS/$2.meta" "asset content of $2 (guid: $1) differ"
 }
 
 check_asset_content() {
+    die_if_symlink unitypackage-contents/"$1"/asset
     die_if_differ unitypackage-contents/"$1"/asset "$CONTENTS/$2" "asset content of $2 (guid: $1) differ"
 }
 
@@ -32,6 +34,7 @@ check_asset_path() {
 }
 
 check_root_asset_meta() {
+    die_if_symlink unitypackage-contents/"$1"/asset.meta
     die_if_differ unitypackage-contents/"$1"/asset.meta "$CONTENTS.meta" "asset content of root asset (guid: $1) differ"
 }
 
@@ -42,4 +45,8 @@ check_root_asset_path() {
 
 die_if_differ() {
     diff "$1" "$2" >&2 || ( shift; shift; die "$@" )
+}
+
+die_if_symlink() {
+    test -L "$1" && ( die "$1 is symlink" ) || :
 }
