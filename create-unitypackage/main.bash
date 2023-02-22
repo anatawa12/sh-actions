@@ -39,9 +39,9 @@ main() {
         fi
 
         mkdir "$TAR_ROOT/$GUID"
-        cp "$meta_path" "$TAR_ROOT/$GUID/asset.meta"
+        cp -L "$meta_path" "$TAR_ROOT/$GUID/asset.meta"
         # copy asset only if the asset is file
-        test -f "$file_path" && cp "$file_path" "$TAR_ROOT/$GUID/asset"
+        test -f "$file_path" && cp -L "$file_path" "$TAR_ROOT/$GUID/asset"
         printf "%s/%s" "$PREFIX" "$file_path" > "$TAR_ROOT/$GUID/pathname"
     done
 
@@ -54,7 +54,7 @@ main() {
             warnf "GUID for %s not found!" "$ROOT_META"
         else
             mkdir "$TAR_ROOT/$GUID"
-            cp "$ROOT_META" "$TAR_ROOT/$GUID/asset.meta"
+            cp -L "$ROOT_META" "$TAR_ROOT/$GUID/asset.meta"
             printf "%s" "$PREFIX" > "$TAR_ROOT/$GUID/pathname"
         fi
     fi
