@@ -51,7 +51,7 @@ jobs:
         run: |
           diff -u "$BASE_PATH/CHANGELOG.$VERSION.md" "$BASE_PATH/CHANGELOG.md"
           test -e "$BASE_PATH/CHANGELOG-SNAPSHOTS.md" &&\
-            diff -u "$BASE_PATH/CHANGELOG-SNAPSHOTS.$VERSION.md" "$BASE_PATH/CHANGELOG-SNAPSHOTS.md"
+            diff -u "$BASE_PATH/CHANGELOG-PRERELEASE.$VERSION.md" "$BASE_PATH/CHANGELOG-PRERELEASE.md"
           diff -u "$BASE_PATH/release-note.$VERSION.md" "$RELEASE_NOTE"
         env:
           BASE_PATH: changelog/prepare-release/tests/run/${{ matrix.test }}
