@@ -78,6 +78,6 @@ The format is based on [Keep a Changelog].
 [Keep a Changelog]: https://keepachangelog.com/en/1.0.0/
 [Conventional Commits]: https://www.conventionalcommits.org/en/v1.0.0/
 
-[Unreleased]: https://github.com/fixrtm/fixRTM/compare/2.1.0...HEAD
-[2.1.0]: https://github.com/fixrtm/fixRTM/compare/2.0.24...2.1.0
+[Unreleased]: https://github.com/anatawa12/sh-actions/compare/2.1.0...HEAD
+[2.1.0]: https://github.com/anatawa12/sh-actions/compare/2.0.24...2.1.0
 [2.0.24]: https://github.com/fixrtm/fixRTM/tags/2.0.24
