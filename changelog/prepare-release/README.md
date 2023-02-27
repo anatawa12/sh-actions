@@ -18,17 +18,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - id: action
-        if: ${{ matrix.run }}
+      - id: changelog
         uses: anatawa12/sh-actions/changelog/prepare-release@master
         with:
             version: ${{ inputs.version }}
-            prerelease-note-prefix: |
+            prerelease-note-heading: |
                 Version ${{ inputs.version }}
                 ---
 
                 **This is SNAPSHOT, not a stable release. make sure this may have many bugs.**
-            release-note-prefix: |
+            release-note-heading: |
                 Version ${{ inputs.version }}
                 ---
 ```
