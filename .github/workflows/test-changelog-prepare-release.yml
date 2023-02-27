@@ -19,6 +19,7 @@ jobs:
         include:
           - run: true
           - test: without-snapshots
+            version: 2.1.0-rc.1
             run: false
 
           - version: 2.1.0
