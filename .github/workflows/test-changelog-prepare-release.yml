@@ -50,10 +50,10 @@ jobs:
       - name: Check
         if: ${{ matrix.run }}
         run: |
-          diff -u "$BASE_PATH/CHANGELOG.$VERSION.md" "$BASE_PATH/CHANGELOG.md"
+          diff --strip-trailing-cr -u "$BASE_PATH/CHANGELOG.$VERSION.md" "$BASE_PATH/CHANGELOG.md"
           test -e "$BASE_PATH/CHANGELOG-SNAPSHOTS.md" &&\
-            diff -u "$BASE_PATH/CHANGELOG-PRERELEASE.$VERSION.md" "$BASE_PATH/CHANGELOG-PRERELEASE.md"
-          diff -u "$BASE_PATH/release-note.$VERSION.md" "$RELEASE_NOTE"
+            diff --strip-trailing-cr -u "$BASE_PATH/CHANGELOG-PRERELEASE.$VERSION.md" "$BASE_PATH/CHANGELOG-PRERELEASE.md"
+          diff --strip-trailing-cr -u "$BASE_PATH/release-note.$VERSION.md" "$RELEASE_NOTE"
         env:
           BASE_PATH: changelog/prepare-release/tests/run/${{ matrix.test }}
           VERSION: ${{ matrix.version }}
