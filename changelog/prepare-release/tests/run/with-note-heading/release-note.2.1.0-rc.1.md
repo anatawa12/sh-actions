@@ -1,4 +1,4 @@
-prerelease-note-prefix
+prerelease-note-heading
 
 ### Fixed
 - version check does not work well if one server returns error [`#607`](https://github.com/anatawa12/sh-actions/pull/607)

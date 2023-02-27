@@ -1,4 +1,4 @@
-release-note-prefix
+release-note-heading
 
 ### Fixed
 - Formation is broken when we disconnected long formation [`#596`](https://github.com/anatawa12/sh-actions/pull/596)
