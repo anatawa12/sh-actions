@@ -28,7 +28,7 @@ we have some macros.
 
 ### Security
 
-## [2.1.0] - 2023-01-27
+## [2.1.0] - 2023-02-27
 ### Fixed
 - Formation is broken when we disconnected long formation [`#596`](https://github.com/anatawa12/sh-actions/pull/596)
 - Signal Converter Setting is not loaded correctly [`#597`](https://github.com/anatawa12/sh-actions/pull/597)

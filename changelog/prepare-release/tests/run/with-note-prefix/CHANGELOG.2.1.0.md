@@ -10,11 +10,6 @@ The format is based on [Keep a Changelog].
 
 [Keep a Changelog]: https://keepachangelog.com/en/1.0.0/
 
-<!--
-we have some macros.
-- `#012` -> [`#012`](https://github.com/fixrtm/fixRTM/pull/012)
--->
-
 ## [Unreleased]
 ### Added
 
@@ -28,7 +23,7 @@ we have some macros.
 
 ### Security
 
-## [2.1.0] - 2023-01-27
+## [2.1.0] - 2023-02-27
 ### Fixed
 - Formation is broken when we disconnected long formation [`#596`](https://github.com/anatawa12/sh-actions/pull/596)
 - Signal Converter Setting is not loaded correctly [`#597`](https://github.com/anatawa12/sh-actions/pull/597)

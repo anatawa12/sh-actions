@@ -10,11 +10,6 @@ The format is based on [Keep a Changelog].
 
 [Keep a Changelog]: https://keepachangelog.com/en/1.0.0/
 
-<!--
-we have some macros.
-- `#012` -> [`#012`](https://github.com/fixrtm/fixRTM/pull/012)
--->
-
 ## [Unreleased]
 ### Added
 
