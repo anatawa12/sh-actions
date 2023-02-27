@@ -50,8 +50,8 @@ a\\
 }
 /^\\[Unreleased]/ {
 a\\
-[Unreleased]: $REPO_URL/compare/$VERSION...HEAD\\
-[$VERSION]: $REPO_URL/compare/$LAST_VERSION...$VERSION
+[Unreleased]: $REPO_URL/compare/$TAG_PREFIX$VERSION...HEAD\\
+[$VERSION]: $REPO_URL/compare/$TAG_PREFIX$LAST_VERSION...$TAG_PREFIX$VERSION
 D
 }
 " <"$temp" >"$INPUT"

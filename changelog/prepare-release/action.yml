@@ -27,6 +27,9 @@ inputs:
   date:
     description: Release date
     required: false
+  tag-prefix:
+    description: Prefix of tag name.
+    required: false
 
   repository-url:
     description: The url for repository
@@ -51,6 +54,7 @@ runs:
         RELEASE_NOTE_HEADING: ${{ inputs.release-note-heading }}
         VERSION_NAME: ${{ inputs.version }}
         RELEASE_DATE: ${{ inputs.date }}
+        TAG_PREFIX: ${{ inputs.tag-prefix }}
         REPO_URL: ${{ inputs.repository-url }}
 
 branding:

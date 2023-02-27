@@ -48,4 +48,5 @@ Following inputs can be used as `step.with` keys:
 | `release-note-heading`    | Text   | The heading text of release note for stable releases. This will be prepended to release notes for stable-releases.                   |
 | `version`                 | String | The name of version. This must be tag name and will also be used as changelog.                                                       |
 | `date`                    | String | The release date of the version. Will be used in changelog. By default, current date in `YYYY-MM-DD` format.                         |
+| `tag-prefix`              | String | The release date of the version. Will be used in changelog. By default, current date in `YYYY-MM-DD` format.                         |
 | `repository-url`          | URL    | URL to the repository. Will be used as prefix for compare url or PullRequest link. like  (`${repository-url}/compare/<tag>...<tag>`) |
