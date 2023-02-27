@@ -1,0 +1,88 @@
+# Changelog
+
+<!--
+For testing, this is substituted from fixRTM's changelog.
+-->
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog].
+
+[Keep a Changelog]: https://keepachangelog.com/en/1.0.0/
+
+<!--
+we have some macros.
+- `#012` -> [`#012`](https://github.com/fixrtm/fixRTM/pull/012)
+-->
+
+## [Unreleased]
+### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [2.1.0] - 2023-01-27
+### Fixed
+- Formation is broken when we disconnected long formation [`#596`](https://github.com/anatawa12/sh-actions/pull/596)
+- Signal Converter Setting is not loaded correctly [`#597`](https://github.com/anatawa12/sh-actions/pull/597)
+- shift-jis based modelpack will cause crash [`#600`](https://github.com/anatawa12/sh-actions/pull/600)
+- version check does not work well if one server returns error [`#607`](https://github.com/anatawa12/sh-actions/pull/607)
+- /rtm delAllTrain does not remove bogie / vehicle part [`#610`](https://github.com/anatawa12/sh-actions/pull/610)
+
+## [2.0.24] - 2022-11-08
+### Added
+- Picking container item [`#539`](https://github.com/fixrtm/fixRTM/pull/539)
+- Add flag to allow place vehicles on protected rails [`#537`](https://github.com/fixrtm/fixRTM/pull/537)
+    - Set `allowPlacingVehiclesOnProtectedRail=false` in `fix-rtm.cfg` to disable this feature
+- Sneak clicking bogie to sneak click Train [`#541`](https://github.com/fixrtm/fixRTM/pull/541)
+- Press tab key to move cursor to next field [`#544`](https://github.com/fixrtm/fixRTM/pull/544)
+- Play brake release sound from all trains in the formation [`#551`](https://github.com/fixrtm/fixRTM/pull/551)
+- RailMap Versioning System [`#561`](https://github.com/fixrtm/fixRTM/pull/561)
+    - This system allow fixRTM to fix/change bad rail shape behaviors!
+- Offsets for TicketVendor [`#568`](https://github.com/fixrtm/fixRTM/pull/568)
+- Show length of rail path [`#578`](https://github.com/fixrtm/fixRTM/pull/578)
+    - You can disable via `showRailLength` in config
+- Configurable ATS Sounds [`#579`](https://github.com/fixrtm/fixRTM/pull/579)
+- Merge diagonal and axis aligned marker to one marker [`#581`](https://github.com/fixrtm/fixRTM/pull/581)
+    - Old and new marker is always registered, but you can select item added to creative tab.
+    - If you want old markers, please set `mergeMarker` to `false`.
+    - This is client side config.
+
+### Changed
+- Start using [Keep a Changelog] [`#511`](https://github.com/fixrtm/fixRTM/pull/511)
+- Start using [Conventional Commits] [`#513`](https://github.com/fixrtm/fixRTM/pull/513)
+- Use minecraft provided system to sync block updates [`#567`](https://github.com/fixrtm/fixRTM/pull/567)
+    - This reduces server lag & reduces packets
+- Start using DataManager to save train speed [`#570`](https://github.com/fixrtm/fixRTM/pull/570)
+    - This improves frequency of train speed update
+- Make many sounds louder [`#572`](https://github.com/fixrtm/fixRTM/pull/572)
+
+### Fixed
+- Pink block bogie problem reproduced [`#512`](https://github.com/fixrtm/fixRTM/pull/512)
+- error on place vehicle (except trains) [`#509`](https://github.com/fixrtm/fixRTM/pull/509)
+- Dropped container item cannot be stacked with item from creative tab [`#540`](https://github.com/fixrtm/fixRTM/pull/540)
+- Copy & Paste was not working in numeric fields [`#543`](https://github.com/fixrtm/fixRTM/pull/543)
+- Train may be overlapped after connecting then setting direction [`#549`](https://github.com/fixrtm/fixRTM/pull/549)
+- `/permit add` adds same person multiple times [`#550`](https://github.com/fixrtm/fixRTM/pull/550)
+- Container drops item in creative mode [`#558`](https://github.com/fixrtm/fixRTM/pull/558)
+- Crossover switch with non-opposite markers may be broken [`#561`](https://github.com/fixrtm/fixRTM/pull/561)
+    - This changes shape engine of crossover switch.
+      With same marker position, crossover rail may be different shape than older.
+- Shaped rail with straight marker doesn't work [`#561`](https://github.com/fixrtm/fixRTM/pull/561)
+- Preview bezier curve is incorrect [`#565`](https://github.com/fixrtm/fixRTM/pull/565)
+- Offsets are not synced to other players immediately
+- Wire connected between entities is not rendered [`#577`](https://github.com/fixrtm/fixRTM/pull/577)
+
+[Keep a Changelog]: https://keepachangelog.com/en/1.0.0/
+[Conventional Commits]: https://www.conventionalcommits.org/en/v1.0.0/
+
+[Unreleased]: https://github.com/fixrtm/fixRTM/compare/2.1.0...HEAD
+[2.1.0]: https://github.com/fixrtm/fixRTM/compare/2.0.24...2.1.0
+[2.0.24]: https://github.com/fixrtm/fixRTM/tags/2.0.24
