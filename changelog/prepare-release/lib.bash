@@ -1,6 +1,4 @@
 
-. "$(dirname "$0")/../common/utils.bash"
-
 # substitute unreleased release note from stdin
 get_unreleased_release_note() {
     sed -e "0,/^## /d" -e '/^## /Q'
