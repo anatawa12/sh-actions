@@ -49,7 +49,7 @@ runs:
         PRERELEASE: ${{ inputs.prerelease }}
         PRERELEASE_NOTE_PREFIX: ${{ inputs.prerelease-note-prefix }}
         RELEASE_NOTE_PREFIX: ${{ inputs.release-note-prefix }}
-        VERSION: ${{ inputs.version }}
+        VERSION_NAME: ${{ inputs.version }}
         RELEASE_DATE: ${{ inputs.date }}
         REPO_URL: ${{ inputs.repository-url }}
 
