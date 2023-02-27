@@ -26,7 +26,8 @@ main() {
 
     # then, get release notes for unreleased
     unreleased_release_note_path=$(mktemp)
-    get_unreleased_release_note "$main_changelog_file_path" \
+    get_unreleased_release_note \
+        < "$main_changelog_file_path" \
         >"$unreleased_release_note_path"
 
     # after that, make unreleased -> released
