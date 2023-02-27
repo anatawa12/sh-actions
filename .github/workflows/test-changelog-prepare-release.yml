@@ -1,0 +1,68 @@
+name: Test
+
+on:
+  push:
+    branches: [master]
+    paths: ['common/**', 'changelog/prepare-release/**', '.github/workflows/test-changelog-prepare-release.yml']
+  pull_request:
+    paths: ['common/**', 'changelog/prepare-release/**', '.github/workflows/test-changelog-prepare-release.yml']
+  workflow_dispatch:
+
+jobs:
+  run-test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        test: [ 'simple', 'with-note-heading', 'without-snapshots' ]
+        version: [ '2.1.0', '2.1.0-rc.1' ]
+        include:
+          - run: true
+          - test: without-snapshots
+            version: 2.1.0-rc.1
+            run: false
+
+          - version: 2.1.0
+            prerelease: false
+          - version: 2.1.0-rc.1
+            prerelease: true
+
+          - test: with-note-heading
+            prerelease-note-heading: prerelease-note-heading
+            release-note-heading: release-note-heading
+
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 1
+    defaults: { run: { shell: bash } }
+    steps:
+      - uses: actions/checkout@v3
+      - id: action
+        if: ${{ matrix.run }}
+        uses: ./changelog/prepare-release
+        with:
+          path: changelog/prepare-release/tests/run/${{ matrix.test }}/CHANGELOG.md
+          prerelease-path: changelog/prepare-release/tests/run/${{ matrix.test }}/CHANGELOG-PRERELEASE.md
+          prerelease: ${{ matrix.prerelease }}
+          version: ${{ matrix.version }}
+          prerelease-note-heading: ${{ matrix.prerelease-note-heading }}
+          release-note-heading: ${{ matrix.release-note-heading }}
+          date: 2023-02-27
+      - name: Check
+        if: ${{ matrix.run }}
+        run: |
+          diff --strip-trailing-cr -u "$BASE_PATH/CHANGELOG.$VERSION.md" "$BASE_PATH/CHANGELOG.md"
+          test -e "$BASE_PATH/CHANGELOG-SNAPSHOTS.md" &&\
+            diff --strip-trailing-cr -u "$BASE_PATH/CHANGELOG-PRERELEASE.$VERSION.md" "$BASE_PATH/CHANGELOG-PRERELEASE.md"
+          diff --strip-trailing-cr -u "$BASE_PATH/release-note.$VERSION.md" "$RELEASE_NOTE"
+        env:
+          BASE_PATH: changelog/prepare-release/tests/run/${{ matrix.test }}
+          VERSION: ${{ matrix.version }}
+          RELEASE_NOTE: ${{ steps.action.outputs.release-note }}
+
+  # Make up matrix statuses into a status for status checks in branch protection rules
+  test-passing:
+    needs: [ run-test ]
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - run: echo "All tests have passed."

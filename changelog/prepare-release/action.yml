@@ -1,0 +1,58 @@
+name: 'Prepare Changelog for release'
+description: 'Prepare Changelog for release'
+inputs:
+  path:
+    description: 'path to release CHANGELOG'
+    required: true
+    default: CHANGELOG.md
+  prerelease-path:
+    description: 'path to prerelease CHANGELOG. '
+    required: true
+    default: CHANGELOG-PRERELEASE.md
+  prerelease:
+    description: "release type is prerelease or not"
+    required: true
+    default: 'false'
+
+  prerelease-note-heading:
+    description: The text prepend to release note file for pre-releases
+    required: false
+  release-note-heading:
+    description: The text prepend to release note file for releases (not appended for prerelease)
+    required: false
+
+  version:
+    description: The name of version
+    required: true
+  date:
+    description: Release date
+    required: false
+
+  repository-url:
+    description: The url for repository
+    required: false
+    default: ${{ github.server_url }}/${{ github.repository }}
+outputs:
+  release-note:
+    description: "Path to generated release note file"
+    value: ${{ steps.main.outputs.release-note }}
+
+runs:
+  using: "composite"
+  steps:
+    - id: main
+      run: bash "$GITHUB_ACTION_PATH/main.bash"
+      shell: bash
+      env:
+        RELEASE_PATH: ${{ inputs.path }}
+        PRERELEASE_PATH: ${{ inputs.prerelease-path }}
+        PRERELEASE: ${{ inputs.prerelease }}
+        PRERELEASE_NOTE_HEADING: ${{ inputs.prerelease-note-heading }}
+        RELEASE_NOTE_HEADING: ${{ inputs.release-note-heading }}
+        VERSION_NAME: ${{ inputs.version }}
+        RELEASE_DATE: ${{ inputs.date }}
+        REPO_URL: ${{ inputs.repository-url }}
+
+branding:
+  icon: 'award'
+  color: 'green'
