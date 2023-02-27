@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v3
       - id: action
         if: ${{ matrix.run }}
-        uses: ./changelog/prepare-release
+        uses: anatawa12/sh-actions/changelog/prepare-release@master
         with:
             version: ${{ inputs.version }}
             prerelease-note-prefix: |
