@@ -1,6 +1,6 @@
 # Update Changelogs
 
-Update `CHANGELOG.md` and ``
+Update `CHANGELOG.md` and `CHANGELOG-PRERELEASE.md` in format of [this template](../CHANGELOG-template.md).
 
 ## Usage
 
