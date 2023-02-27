@@ -14,10 +14,10 @@ inputs:
     required: true
     default: 'false'
 
-  prerelease-note-prefix:
+  prerelease-note-heading:
     description: The text prepend to release note file for pre-releases
     required: false
-  release-note-prefix:
+  release-note-heading:
     description: The text prepend to release note file for releases (not appended for prerelease)
     required: false
 
@@ -47,8 +47,8 @@ runs:
         RELEASE_PATH: ${{ inputs.path }}
         PRERELEASE_PATH: ${{ inputs.prerelease-path }}
         PRERELEASE: ${{ inputs.prerelease }}
-        PRERELEASE_NOTE_PREFIX: ${{ inputs.prerelease-note-prefix }}
-        RELEASE_NOTE_PREFIX: ${{ inputs.release-note-prefix }}
+        PRERELEASE_NOTE_HEADING: ${{ inputs.prerelease-note-heading }}
+        RELEASE_NOTE_HEADING: ${{ inputs.release-note-heading }}
         VERSION_NAME: ${{ inputs.version }}
         RELEASE_DATE: ${{ inputs.date }}
         REPO_URL: ${{ inputs.repository-url }}

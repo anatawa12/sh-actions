@@ -14,7 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ ubuntu-latest, windows-latest, macos-latest ]
-        test: [ 'simple', 'with-note-prefix', 'without-snapshots' ]
+        test: [ 'simple', 'with-note-heading', 'without-snapshots' ]
         version: [ '2.1.0', '2.1.0-rc.1' ]
         include:
           - run: true
@@ -27,9 +27,9 @@ jobs:
           - version: 2.1.0-rc.1
             prerelease: true
 
-          - test: with-note-prefix
-            prerelease-note-prefix: prerelease-note-prefix
-            release-note-prefix: release-note-prefix
+          - test: with-note-heading
+            prerelease-note-heading: prerelease-note-heading
+            release-note-heading: release-note-heading
 
     runs-on: ${{ matrix.os }}
     timeout-minutes: 1
@@ -44,8 +44,8 @@ jobs:
           prerelease-path: changelog/prepare-release/tests/run/${{ matrix.test }}/CHANGELOG-PRERELEASE.md
           prerelease: ${{ matrix.prerelease }}
           version: ${{ matrix.version }}
-          prerelease-note-prefix: ${{ matrix.prerelease-note-prefix }}
-          release-note-prefix: ${{ matrix.release-note-prefix }}
+          prerelease-note-heading: ${{ matrix.prerelease-note-heading }}
+          release-note-heading: ${{ matrix.release-note-heading }}
           date: 2023-02-27
       - name: Check
         if: ${{ matrix.run }}

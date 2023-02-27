@@ -43,9 +43,9 @@ main() {
     release_note_path=$(mktemp)
     {
         if $PRERELEASE; then
-            test -n "$PRERELEASE_NOTE_PREFIX" && ( echo "$PRERELEASE_NOTE_PREFIX"; echo "" )
+            test -n "$PRERELEASE_NOTE_HEADING" && ( echo "$PRERELEASE_NOTE_HEADING"; echo "" )
         else
-            test -n "$RELEASE_NOTE_PREFIX" && ( echo "$RELEASE_NOTE_PREFIX"; echo "" )
+            test -n "$RELEASE_NOTE_HEADING" && ( echo "$RELEASE_NOTE_HEADING"; echo "" )
         fi
         cat "$unreleased_release_note_path"
     } >>"$release_note_path"
