@@ -58,9 +58,11 @@ install() {
 
 may_init_git() {
     REPOSITORY="${1:-""}"
-    if ! git rev-parse --git-dir /dev/null 2>&1; then
+    if git rev-parse --git-dir /dev/null 2>&1; then
+        echo "skipping initializing repository for $REPOSITORY" >&2;
+    else
         REPOSITORY="${REPOSITORY:-"$(die "git repo not found")"}"
-        debugf "initializing repository for %s" "$REPOSITORY"
+        echo "initializing repository for $REPOSITORY" >&2;
         git init
         git remote add origin "$REPOSITORY"
         git config remote.origin.promisor true
