@@ -63,7 +63,7 @@ may_init_git() {
     else
         REPOSITORY="${REPOSITORY:-"$(die "git repo not found")"}"
         echo "initializing repository for $REPOSITORY" >&2;
-        git init
+        git init --quiet
         git remote add origin "$REPOSITORY"
         git config remote.origin.promisor true
         git config remote.origin.partialclonefilter tree:0
