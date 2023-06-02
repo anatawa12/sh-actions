@@ -5,13 +5,11 @@ Run conventional-commitlint
 ## Usage
 
 ```yaml
-name: ci
-
 on:
   pull_request:
 
 jobs:
-  test:
+  check-conventional-commit:
     runs-on: ubuntu-latest
     steps:
       - uses: anatawa12/sh-actions/conventional-commitlint@master
