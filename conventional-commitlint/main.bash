@@ -67,7 +67,7 @@ may_init_git() {
         git remote add origin "$REPOSITORY"
         git config remote.origin.promisor true
         git config remote.origin.partialclonefilter tree:0
-        git fetch origin $GITHUB_REF
+        git fetch origin
     fi
 }
 
@@ -85,8 +85,8 @@ main() {
     mkdir -p "$WORKSPACE"
     cd "$WORKSPACE"
     may_init_git "$REPOSITORY"
-    debugf "running check for %s .. %s" "$HEAD" "$BASE"
-    "$OUTPUT_FILE" check "$HEAD" "$BASE"
+    echo "running check for $HEAD .. $BASE"
+    "$OUTPUT_FILE" check "origin/$HEAD" "origin/$BASE"
 }
 
 . "$(dirname $0)/../common/utils.bash"
