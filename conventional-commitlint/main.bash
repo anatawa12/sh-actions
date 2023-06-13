@@ -87,7 +87,7 @@ main() {
     cd "$WORKSPACE"
     may_init_git "$REPOSITORY" "$HEAD"
     echo "running check for $HEAD .. $BASE"
-    "$OUTPUT_FILE" check "origin/$HEAD" "origin/$BASE"
+    "$OUTPUT_FILE" check "$HEAD" "$BASE"
 }
 
 . "$(dirname $0)/../common/utils.bash"
