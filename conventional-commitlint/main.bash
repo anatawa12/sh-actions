@@ -58,6 +58,7 @@ install() {
 
 may_init_git() {
     REPOSITORY="${1:-""}"
+    HEAD="${2:-""}"
     if git rev-parse --git-dir >/dev/null 2>&1; then
         echo "skipping initializing repository for $REPOSITORY" >&2;
     else
@@ -67,7 +68,7 @@ may_init_git() {
         git remote add origin "$REPOSITORY"
         git config remote.origin.promisor true
         git config remote.origin.partialclonefilter tree:0
-        git fetch origin
+        git fetch origin "$HEAD"
     fi
 }
 
@@ -84,7 +85,7 @@ main() {
 
     mkdir -p "$WORKSPACE"
     cd "$WORKSPACE"
-    may_init_git "$REPOSITORY"
+    may_init_git "$REPOSITORY" "$HEAD"
     echo "running check for $HEAD .. $BASE"
     "$OUTPUT_FILE" check "origin/$HEAD" "origin/$BASE"
 }
