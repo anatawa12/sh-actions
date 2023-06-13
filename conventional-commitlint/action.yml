@@ -18,11 +18,11 @@ inputs:
     required: false
   head:
     description: The head ref. By default, `github.head_ref` will be used.
-    default: ${{ github.head_ref }}
+    default: ${{ github.event.pull_request.head.sha }}
     required: false
   base:
     description: The base ref. By default, `github.base_ref` will be used.
-    default: ${{ github.base_ref }}
+    default: ${{ github.event.pull_request.base.sha }}
     required: false
 runs:
   using: "composite"
