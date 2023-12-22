@@ -31,6 +31,7 @@ main() {
     # parameter check
     VERSION="${1:-latest}"
     TARGET="${2:-"$(infer_current_target)"}"
+    OVERRIDE="${3:-"true"}"
 
     # compute
     SUFFIX="$(executable_suffix "$TARGET")"
@@ -50,15 +51,23 @@ main() {
         TARGET="x86_64-pc-windows-msvc"
     fi
 
+    if ! [ "$OVERRIDE" = true ] && command vrc-get --version >/dev/null 2>&1; then
+        echo "vrc-get is already installed" >&2;
+        exit 0
+    fi
+
     echo "installing vrc-get version $VERSION from $URL" >&2;
 
     # do download
-    mkdir "$OUTPUT_PATH"
+    mkdir -p "$OUTPUT_PATH"
     curl -sfL "$URL" > "$OUTPUT_FILE"
     chmod +x "$OUTPUT_FILE"
 
     # add to path
     echo "$OUTPUT_PATH" >> $GITHUB_PATH
+
+    # print version
+    "$OUTPUT_FILE" --version
 }
 
 read_guid() {
