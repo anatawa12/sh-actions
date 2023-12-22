@@ -38,7 +38,7 @@ jobs:
       - uses: actions/checkout@v3
       - id: action
         uses: ./setup-vrc-get
-      - id: action twice
+      - id: action-second
         uses: ./setup-vrc-get
       - name: Check
         run: |
@@ -47,7 +47,7 @@ jobs:
 
   # Make up matrix statuses into a status for status checks in branch protection rules
   test-passing:
-    needs: [ test, install-twice ]
+    needs: [ test, test-install-twice ]
     runs-on: ubuntu-latest
     timeout-minutes: 1
     steps:
