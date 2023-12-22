@@ -25,7 +25,15 @@ runs:
       env:
         REPOS: ${{ inputs.repos }}
     - id: main
-      run: vrc-get install --project $PROJECT_PATH
+      run: vrc-get resolve --project $PROJECT_PATH
+      shell: bash
+      env:
+        PROJECT_PATH: ${{ inputs.project-path }}
+
+    - id: show-installed
+      run: |
+        echo "Installed packages:"
+        vrc-get info project --project $PROJECT_PATH
       shell: bash
       env:
         PROJECT_PATH: ${{ inputs.project-path }}
