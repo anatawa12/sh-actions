@@ -33,6 +33,30 @@ jobs:
         env:
           TEST_NAME: ${{ matrix.test }}
 
+  user-repo-with-yaml:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        test: [ with-user-repo ]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 1
+    defaults: { run: { shell: bash } }
+    steps:
+      - uses: actions/checkout@v3
+      - uses: anatawa12/something-releaser@v2
+      - id: action
+        uses: ./resolve-vpm-packages
+        with:
+          project-path: "resolve-vpm-packages/tests/${{ matrix.test }}/project"
+          repos: |
+            https://vpm.anatawa12.com/vpm.json
+            https://vpm.nadena.dev/vpm-prerelease.json
+      - name: Check
+        run: bash -eu resolve-vpm-packages/tests/${{ matrix.test }}/check.bash
+        env:
+          TEST_NAME: ${{ matrix.test }}
+
   # Make up matrix statuses into a status for status checks in branch protection rules
   test-passing:
     needs: [ test ]
