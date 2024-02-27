@@ -28,5 +28,4 @@ The format is based on [Keep a Changelog].
 
 ### Security
 
-[Unreleased]: https://github.com/fixrtm/fixRTM/compare/2.0.24...HEAD
-[2.0.24]: https://github.com/fixrtm/fixRTM/tags/2.0.24
+[Unreleased]: https://github.com/fixrtm/fixRTM/commits/HEAD

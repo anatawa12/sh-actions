@@ -31,5 +31,5 @@ The format is based on [Keep a Changelog].
 - version check does not work well if one server returns error [`#607`](https://github.com/anatawa12/sh-actions/pull/607)
 - /rtm delAllTrain does not remove bogie / vehicle part [`#610`](https://github.com/anatawa12/sh-actions/pull/610)
 
-[Unreleased]: https://github.com/anatawa12/sh-actions/2.1.0...HEAD
+[Unreleased]: https://github.com/anatawa12/sh-actions/compare/2.1.0...HEAD
 [2.1.0]: https://github.com/anatawa12/sh-actions/releases/tag/2.1.0
