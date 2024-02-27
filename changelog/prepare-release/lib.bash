@@ -1,7 +1,7 @@
 
 # substitute unreleased release note from stdin
 get_unreleased_release_note() {
-    sed -e "1,/^## /d" -e '/^## /,$d'
+    sed -e "1,/^## /d" -e '/^## /,$d' -e '/^\[Unreleased\]:/,$d'
 }
 
 prepare_changelog() {
