@@ -19,9 +19,4 @@ The format is based on [Keep a Changelog].
 
 ### Security
 
-TODO: PLEASE DEFINE FIRST / PREVIOUS RELEASES. THIS ACTION DOES NOT SUPPORT CREATING RELEASE NOTE FOR FIRST VERSION
-
-## [first-version] - 2022-11-08
-
-[Unreleased]: https://github.com/owner/repo/compare/first-version...HEAD
-[first-version]: https://github.com/owner/repo/tags/first-version
+[Unreleased]: https://github.com/owner/repo/compare/commits/HEAD
