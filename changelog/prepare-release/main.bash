@@ -7,7 +7,7 @@ main() {
         PRERELEASE=false
     fi
 
-    if ! $PRERELEASE && [ ! -w "$PRERELEASE_PATH" ]; then
+    if [ ! -w "$PRERELEASE_PATH" ]; then
         NO_PRERELEASE=true
     else
         NO_PRERELEASE=false
