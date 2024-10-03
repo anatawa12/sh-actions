@@ -14,7 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ ubuntu-latest, windows-latest, macos-latest ]
-        test: [ 'simple', 'with-note-heading', 'without-snapshots', 'tag-prefix', 'initial' ]
+        test: [ 'simple', 'with-note-heading', 'without-snapshots', 'tag-prefix', 'initial', 'single-with-prereleases' ]
         version: [ '2.1.0', '2.1.0-rc.1' ]
         include:
           - run: true
