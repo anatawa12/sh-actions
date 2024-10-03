@@ -4,6 +4,14 @@ get_unreleased_release_note() {
     sed -e "1,/^## /d" -e '/^## /,$d' -e '/^\[Unreleased\]:/,$d'
 }
 
+prepare_changelog_core() {
+    sed -e "/^###/{
+    N
+    /###.*\n$/d
+    }" \
+      | perl -pe 's/(?<= )`#(\d+)`(?= |$)/[`#$1`]($ENV{"REPO_URL"}\/pull\/$1)/g'
+}
+
 prepare_changelog() {
     local temp INPUT
     INPUT="$1"
@@ -11,12 +19,7 @@ prepare_changelog() {
 
     cp "$INPUT" "$temp"
 
-    sed -e "/^###/{
-    N
-    /###.*\n$/d
-    }" <"$temp" \
-      | perl -pe 's/(?<= )`#(\d+)`(?= |$)/[`#$1`]($ENV{"REPO_URL"}\/pull\/$1)/g' \
-      >"$INPUT"
+    prepare_changelog_core <"$temp" >"$INPUT"
 
     rm "$temp"
 }

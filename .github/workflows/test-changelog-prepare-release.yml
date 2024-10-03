@@ -14,7 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ ubuntu-latest, windows-latest, macos-latest ]
-        test: [ 'simple', 'with-note-heading', 'without-snapshots', 'tag-prefix', 'initial' ]
+        test: [ 'simple', 'with-note-heading', 'without-snapshots', 'tag-prefix', 'initial', 'single-with-prereleases' ]
         version: [ '2.1.0', '2.1.0-rc.1' ]
         include:
           - run: true
@@ -55,7 +55,7 @@ jobs:
         if: ${{ matrix.run }}
         run: |
           diff --strip-trailing-cr -u "$BASE_PATH/CHANGELOG.$VERSION.md" "$BASE_PATH/CHANGELOG.md"
-          test -e "$BASE_PATH/CHANGELOG-SNAPSHOTS.md" &&\
+          test -e "$BASE_PATH/CHANGELOG-PRERELEASE.md" &&\
             diff --strip-trailing-cr -u "$BASE_PATH/CHANGELOG-PRERELEASE.$VERSION.md" "$BASE_PATH/CHANGELOG-PRERELEASE.md"
           diff --strip-trailing-cr -u "$BASE_PATH/release-note.$VERSION.md" "$RELEASE_NOTE"
         env:
