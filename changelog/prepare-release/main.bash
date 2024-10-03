@@ -13,7 +13,7 @@ main() {
         NO_PRERELEASE=false
     fi
 
-    if ! $PRERELEASE; then
+    if ! $PRERELEASE || $NO_PRERELEASE ; then
         # shellcheck disable=SC2153
         main_changelog_file_path="$RELEASE_PATH"
     else
@@ -26,8 +26,9 @@ main() {
 
     # then, get release notes for unreleased
     unreleased_release_note_path=$(mktemp)
-    get_unreleased_release_note \
-        < "$main_changelog_file_path" \
+    <"$main_changelog_file_path" \
+        prepare_changelog_core \
+        | get_unreleased_release_note \
         >"$unreleased_release_note_path"
 
     # after that, make unreleased -> released
