@@ -1,0 +1,97 @@
+name: Test create-vpai
+
+on:
+  push:
+    branches: [master]
+    paths: ['common/**', 'create-vpai/**', '.github/workflows/test-create-vpai.yml']
+  pull_request:
+    paths: ['common/**', 'create-vpai/**', '.github/workflows/test-create-vpai.yml']
+  workflow_dispatch:
+
+jobs:
+  test-structured:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 1
+    defaults: { run: { shell: bash } }
+    steps:
+      - uses: actions/checkout@v3
+      - id: action
+        uses: ./create-vpai
+        with:
+          repositories: |
+            https://lilxyzw.github.io/vpm-repos/vpm.json
+          packages:
+            jp.lilxyzw.liltoon
+            jp.lilxyzw.lilycalinventory@1.x.x
+          output: test.unitypackage
+      - name: Check exists
+        run: test -f test.unitypackage
+
+  test-structured-no-repos:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 1
+    defaults: { run: { shell: bash } }
+    steps:
+      - uses: actions/checkout@v3
+      - id: action
+        uses: ./create-vpai
+        with:
+          packages: |
+            lyuma.av3emulator@1
+            vrchat.blackstartx.gesture-manager@3
+          output: test.unitypackage
+      - name: Check exists
+        run: test -f test.unitypackage
+
+  test-config-file:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 1
+    defaults: { run: { shell: bash } }
+    steps:
+      - uses: actions/checkout@v3
+      - run: echo '{"vpmRepositories":["https://vpm.anatawa12.com/vpm.json"],"vpmDependencies":{"com.anatawa12.avatar-optimizer":"1"}}' > "config.json"
+      - id: action
+        uses: ./create-vpai
+        with:
+          config-file: config.json
+          output: test.unitypackage
+      - name: Check exists
+        run: test -f test.unitypackage
+
+  test-config-json:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 1
+    defaults: { run: { shell: bash } }
+    steps:
+      - uses: actions/checkout@v3
+      - id: action
+        uses: ./create-vpai
+        with:
+          config-json: '{"vpmRepositories":["https://vpm.anatawa12.com/vpm.json"],"vpmDependencies":{"com.anatawa12.avatar-optimizer":"1"}}'
+          output: test.unitypackage
+      - name: Check exists
+        run: test -f test.unitypackage
+
+  # Make up matrix statuses into a status for status checks in branch protection rules
+  test-passing:
+    needs: [ test, test-install-twice ]
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - run: echo "All tests have passed."
