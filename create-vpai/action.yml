@@ -1,0 +1,34 @@
+name: 'Resolve vpm packages'
+description: 'Resolves (installs) defined vpm packages of your unity project'
+inputs:
+  repositories:
+    description: List of repositories that will be used to search the package and will be added to VCC.
+    required: false
+  packages:
+    description: List of packages to be installed.
+    required: false
+  config-file:
+    description: Path to vpai config file.
+    required: false
+  config-json:
+    description: Embedded vpai config file.
+    required: false
+  output:
+    description: Path to output unitypackage
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - id: main
+      run: bash "$GITHUB_ACTION_PATH/main.bash"
+      shell: bash
+      env:
+        REPOSITORIES: ${{ inputs.repositories }}
+        PACKAGES: ${{ inputs.packages }}
+        CONFIG_FILE: ${{ inputs.config-file }}
+        CONFIG_JSON: ${{ inputs.config-json }}
+        OUTPUT: ${{ inputs.output }}
+
+branding:
+  icon: 'award'
+  color: 'green'
