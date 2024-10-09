@@ -20,7 +20,7 @@ printf_prefix() {
     printf "$PREFIX$FMT\n" "$@"
 }
 
-if [ "$GITHUB_ACTIONS" = "true" ]; then
+if [ "${GITHUB_ACTIONS:-}" = "true" ]; then
 warnf () { printf_prefix "::warning::" "$@" >&2 ;}
 debugf () { printf_prefix "::debug::" "$@" ;}
 else
@@ -60,6 +60,14 @@ relativize_path() {
 }
 
 #endregion
+
+inplace() {
+    local INOUT="$1"
+    local TMP="$(mktemp)"
+    shift
+    "$@" <"$INOUT" >"$TMP"
+    mv "$TMP" "$INOUT"
+}
 
 #region polyfills
 # tac is not posix command. use tail -r instead

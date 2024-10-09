@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: anatawa12/sh-actions/reesolve-vpm-packages@master
+      - uses: anatawa12/sh-actions/resolve-vpm-packages@master
       # You can test using game-ci/unity-test-runner@v2
 ```
 
