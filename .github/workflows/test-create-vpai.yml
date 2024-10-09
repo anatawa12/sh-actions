@@ -90,7 +90,7 @@ jobs:
 
   # Make up matrix statuses into a status for status checks in branch protection rules
   test-passing:
-    needs: [ test, test-install-twice ]
+    needs: [ test-structured, test-structured-no-repos, test-config-file, test-config-json ]
     runs-on: ubuntu-latest
     timeout-minutes: 1
     steps:
