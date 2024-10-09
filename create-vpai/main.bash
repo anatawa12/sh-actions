@@ -44,7 +44,7 @@ create_config_file() {
     esac
 
     if [ "$USE_STRUCTURED" == 0 ]; then
-        if [ -z "$REPOSITORIES" ]; then
+        if [ -n "${REPOSITORIES:-}" ]; then
             die "Either config-file or config-json is specified but repositories is also specified."
         fi
     fi
