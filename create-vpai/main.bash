@@ -3,7 +3,7 @@ set -eu
 
 main() {
     local config_file_data=$(mktemp)
-    local creator_path=$(mktemp "$TMPDIR/XXXXXX-vpai-creator.mjs")
+    local creator_path=$(mktemp "${TMPDIR:-/tmp}/XXXXXX-vpai-creator.mjs")
 
     if [ -z "${OUTPUT:-}" ]; then
         die "no output is specified"
