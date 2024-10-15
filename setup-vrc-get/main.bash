@@ -32,6 +32,7 @@ main() {
     VERSION="${1:-latest}"
     TARGET="${2:-"$(infer_current_target)"}"
     OVERRIDE="${3:-"true"}"
+    FIX_OFFICIAL_CURATED_REPOSITORY="${4:-"true"}"
 
     # compute
     SUFFIX="$(executable_suffix "$TARGET")"
@@ -68,6 +69,21 @@ main() {
 
     # print version
     "$OUTPUT_FILE" --version
+
+    if [ "$FIX_OFFICIAL_CURATED_REPOSITORY" = true ]; then
+        XDG_DATA_DIR="${XDG_DATA_HOME:-"$HOME/.local/share"}"
+        CONFIG_DIR="${XDG_DATA_DIR}/VRChatCreatorCompanion/vrc-get"
+        VRC_GET_SETTINGS="${CONFIG_DIR}/settings.json"
+        if ! [ -e "$VRC_GET_SETTINGS" ]; then
+            # set
+            mkdir -p "$CONFIG_DIR"
+            echo "saving ignore config to $VRC_GET_SETTINGS"
+            echo '{ "ignoreOfficialRepository": true, "ignoreCuratedRepository": true }' > "$VRC_GET_SETTINGS"
+            echo "adding direct link to official / curated repository"
+            "$OUTPUT_FILE" repo add 'https://vrchat.github.io/packages/index.json?download'
+            "$OUTPUT_FILE" repo add 'https://vrchat-community.github.io/vpm-listing-curated/index.json?download'
+        fi
+    fi
 }
 
 read_guid() {
