@@ -78,7 +78,9 @@ main() {
         if ! [ -e "$VRC_GET_SETTINGS" ]; then
             # set
             mkdir -p "$CONFIG_DIR"
+            echo "saving ignore config to $VRC_GET_SETTINGS"
             echo '{ "ignoreOfficialRepository": true, "ignoreCuratedRepository": true }' > "$VRC_GET_SETTINGS"
+            echo "adding direct link to official / curated repository"
             "$OUTPUT_FILE" repo add 'https://vrchat.github.io/packages/index.json?download'
             "$OUTPUT_FILE" repo add 'https://vrchat-community.github.io/vpm-listing-curated/index.json?download'
         fi
