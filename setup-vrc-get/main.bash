@@ -73,9 +73,11 @@ main() {
     if [ "$FIX_OFFICIAL_CURATED_REPOSITORY" = true ]; then
         XDG_DATA_DIR="${XDG_DATA_HOME:-"$HOME/.local/share"}"
         # TODO: update with vrc-get 1.8.0 release
-        VRC_GET_SETTINGS="${XDG_DATA_DIR}/VRChatCreatorCompanion/vrc-get-settings.json"
+        CONFIG_DIR="${XDG_DATA_DIR}/VRChatCreatorCompanion"
+        VRC_GET_SETTINGS="${CONFIG_DIR}/vrc-get-settings.json"
         if ! [ -e "$VRC_GET_SETTINGS" ]; then
             # set
+            mkdir -p "$CONFIG_DIR"
             echo '{ "ignoreOfficialRepository": true, "ignoreCuratedRepository": true }' > "$VRC_GET_SETTINGS"
             vrc-get repo add 'https://vrchat.github.io/packages/index.json?download'
             vrc-get repo add 'https://vrchat-community.github.io/vpm-listing-curated/index.json?download'
