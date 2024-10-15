@@ -12,16 +12,23 @@ inputs:
     description: 'override existing vrc-get'
     default: 'true'
     required: false
+  fix-official-curated-repository:
+    description: |
+      Use direct link for accessing official / curated repository.
+      This would use experimental vrc-get feature.
+      This is for recent workaround accessibility problem.
+    default: true
 runs:
   using: "composite"
   steps:
     - id: main
-      run: bash "$GITHUB_ACTION_PATH/main.bash" "$VERSION" "$TARGET" "$OVERRIDE"
+      run: bash "$GITHUB_ACTION_PATH/main.bash" "$VERSION" "$TARGET" "$OVERRIDE" "$FIX_OFFICIAL_CURATED_REPOSITORY"
       shell: bash
       env:
         VERSION: ${{ inputs.version }}
         TARGET: ${{ inputs.target }}
         OVERRIDE: ${{ inputs.override }}
+        FIX_OFFICIAL_CURATED_REPOSITORY: ${{ inputs.fix-official-curated-repository }}
 branding:
   icon: 'award'
   color: 'green'
