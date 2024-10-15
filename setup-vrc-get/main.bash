@@ -72,9 +72,8 @@ main() {
 
     if [ "$FIX_OFFICIAL_CURATED_REPOSITORY" = true ]; then
         XDG_DATA_DIR="${XDG_DATA_HOME:-"$HOME/.local/share"}"
-        # TODO: update with vrc-get 1.8.0 release
-        CONFIG_DIR="${XDG_DATA_DIR}/VRChatCreatorCompanion"
-        VRC_GET_SETTINGS="${CONFIG_DIR}/vrc-get-settings.json"
+        CONFIG_DIR="${XDG_DATA_DIR}/VRChatCreatorCompanion/vrc-get"
+        VRC_GET_SETTINGS="${CONFIG_DIR}/settings.json"
         if ! [ -e "$VRC_GET_SETTINGS" ]; then
             # set
             mkdir -p "$CONFIG_DIR"
